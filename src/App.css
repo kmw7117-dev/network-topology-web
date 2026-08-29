@@ -1,0 +1,182 @@
+:root {
+  --bg: #0f1115;
+  --panel: #171a21;
+  --border: #262b36;
+  --text: #e6e8ec;
+  --muted: #8b93a3;
+  --accent: #4f8cff;
+  --added: #3ddc84;
+  --removed: #ff5c5c;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "Pretendard", "Malgun Gothic", sans-serif;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.app__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.app__header h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.app__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app__controls select {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.app__tabs button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 6px 14px;
+  cursor: pointer;
+}
+.app__tabs button:first-child { border-radius: 8px 0 0 8px; }
+.app__tabs button:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+.app__tabs button.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.app__error {
+  background: #3a1c1c;
+  border: 1px solid var(--removed);
+  color: #ffb3b3;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.app__loading { color: var(--muted); margin-bottom: 12px; }
+
+.empty { color: var(--muted); font-size: 14px; }
+
+.topology__subnet { margin-bottom: 28px; }
+
+.topology__subnet-label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.topology__nodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.node-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.node-card__ip { font-weight: 600; font-size: 14px; margin-top: 4px; }
+.node-card__name { font-size: 12px; color: var(--muted); }
+.node-card__vendor { font-size: 11px; color: var(--muted); }
+
+.device-icon--router { color: #f5a623; }
+.device-icon--server { color: #4f8cff; }
+.device-icon--pc { color: #e6e8ec; }
+.device-icon--mobile { color: #3ddc84; }
+.device-icon--iot { color: #c084fc; }
+.device-icon--ap { color: #38bdf8; }
+.device-icon--unknown { color: var(--muted); }
+
+.diff {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.diff__col h3 { font-size: 14px; margin-bottom: 10px; }
+
+.diff__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+}
+.diff__row--added { border-color: var(--added); }
+.diff__row--removed { border-color: var(--removed); }
+.diff__vendor { margin-left: auto; color: var(--muted); font-size: 12px; }
+
+@media (max-width: 640px) {
+  .diff { grid-template-columns: 1fr; }
+}
+
+/* react-flow 노드 */
+.flow-node {
+  padding: 6px 4px;
+  text-align: center;
+}
+.flow-node__ip { font-weight: 600; font-size: 13px; }
+.flow-node__name { font-size: 11px; color: var(--muted); }
+.flow-node__vendor { font-size: 10px; color: var(--muted); }
+
+.react-flow__node {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  color: var(--text) !important;
+}
+
+.flow-node--gateway.react-flow__node {
+  border-color: #f5a623 !important;
+}
+.flow-node--router { border-left: 3px solid #f5a623 !important; }
+.flow-node--server { border-left: 3px solid #4f8cff !important; }
+.flow-node--pc { border-left: 3px solid #e6e8ec !important; }
+.flow-node--mobile { border-left: 3px solid #3ddc84 !important; }
+.flow-node--iot { border-left: 3px solid #c084fc !important; }
+.flow-node--unknown { border-left: 3px solid var(--muted) !important; }
+
+.flow-node__subnet {
+  font-size: 9px;
+  color: var(--accent);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
