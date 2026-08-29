@@ -1,30 +1,30 @@
 # network-topology-web
 
-network-topology-api를 통해 InfluxDB v3의 스캔 결과를 시각화하는 React(Vite) 프론트엔드.
+IP/ARP 스캔 기반 네트워크 토폴로지 시각화 웹 UI입니다. [network-topology-api](https://github.com/kmw7117-dev/network-topology-api)가 InfluxDB v3에 적재한 스캔 결과를 읽어와, 서브넷별 장비 목록과 L3 연결 구조(게이트웨이/브릿지)를 화면에 그려줍니다.
 
-- 서브넷별 카드 형태 토폴로지 뷰 (vendor 문자열 기반으로 대략적인 장비 아이콘 자동 매핑)
-- 스캔 회차(날짜) 선택 드롭다운
-- 최근 두 회차 비교(신규/사라진 장비) 탭
+## 스크린샷
 
-## 설치 및 실행
+![토폴로지 뷰](screenshots/topology-view.png)
+
+서브넷(10.10.10.0/24, 192.168.45.0/24)별로 장비를 그룹핑해서 보여주고, 각 카드에는 IP, 호스트명, 제조사(벤더) 정보가 표시됩니다.
+
+## 주요 기능
+
+- **토폴로지**: 서브넷별 장비 카드 뷰 (IP / 호스트명 / 벤더)
+- **네트워크 지도**: `@xyflow/react` 기반 그래프 뷰 — 서브넷별 게이트웨이-스타 엣지 + 멀티홈 장비의 크로스 서브넷 브릿지 엣지 표시
+- **변경 비교**: 스캔 시점 간 장비 변화(diff) 비교
+
+## 기술 스택
+
+- Frontend: Vite + React + TypeScript, `@xyflow/react`
+- Backend: [network-topology-api](https://github.com/kmw7117-dev/network-topology-api) (Node.js/Express)
+- Data source: InfluxDB v3
+
+## 실행
 
 ```bash
 npm install
-cp .env.example .env
-# .env 의 VITE_API_BASE 를 network-topology-api 주소로 맞추기
-npm run dev -- --host
+npm run dev
 ```
 
-## vendor → 아이콘 매핑
-
-`src/vendorIcon.tsx`의 `KEYWORD_RULES`에서 vendor 문자열 키워드로 장비
-유형(router/server/pc/mobile/iot/unknown)을 추정하고, lucide-react의 범용
-아이콘을 붙인다. 실제 회사 로고(상표)는 쓰지 않음 — 특정 장비를 브랜드
-느낌으로 표시하고 싶으면 이 매핑 규칙에 케이스를 추가하면 됨.
-
-## 프로덕션 빌드
-
-```bash
-npm run build   # dist/ 생성
-npm run preview # 로컬에서 빌드 결과 확인
-```
+백엔드(network-topology-api)가 먼저 실행되어 있어야 합니다.
