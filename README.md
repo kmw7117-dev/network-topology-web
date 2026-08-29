@@ -1,5 +1,7 @@
 # network-topology-web
 
+🇰🇷 한국어 · [🇺🇸 English](README.en.md)
+
 IP/ARP 스캔 기반 네트워크 토폴로지 시각화 웹 UI입니다. [network-topology-api](https://github.com/kmw7117-dev/network-topology-api)가 InfluxDB v3에 적재한 스캔 결과를 읽어와, 서브넷별 장비 목록과 L3 연결 구조(게이트웨이/브릿지)를 화면에 그려줍니다.
 
 ## 스크린샷
